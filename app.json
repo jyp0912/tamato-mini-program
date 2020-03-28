@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/tomato/tomato",
+    "pages/home/home",
+    
+    "components/button/button",
+    "components/confirm/confirm",
+    "components/clock/clock",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
