@@ -1,0 +1,10 @@
+<view class="login">
+  <view class="avatar">
+    <open-data type='userAvatarUrl'></open-data>
+  </view>
+  <view class="details" >
+    <open-data type="userNickName" class="name-wrapper"></open-data>
+  </view>
+  <button class="loginButton" hover-class="button-hover">登录</button>
+  <navigator class="loginBinding" url="/pages/">还没有和PC绑定吗？点击绑定</navigator>
+</view>
