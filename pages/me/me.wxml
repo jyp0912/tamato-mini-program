@@ -1,4 +1,4 @@
-<!-- <view class="container">
+<view class="container">
   <view class="header">
     <view class="avatar">
       <open-data type='userAvatarUrl'></open-data>
@@ -7,10 +7,9 @@
       <open-data type='userNickName' class="name"></open-data>
       <navigator url="/pages/binding/binding" wx:if="{{!me.account}}">绑定pc账号</navigator>
     </view>
-    <button open-type="contact" class="qr">问题反馈</button> -->
+    <button open-type="contact" class="qr">问题反馈</button>
     <!-- <view class="qr">问题反馈</view> -->
-  <!-- </view>
-
+  </view>
   <view class="tabs">
     <view hover-class='hover-active' 
           class="{{tab === 'tomato' && 'active'}}" 
@@ -41,4 +40,4 @@
       </view>
     </view>
   </scroll-view>
-</view> -->
+</view>

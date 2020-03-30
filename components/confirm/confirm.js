@@ -16,12 +16,19 @@ Component({
   data:{
     value:''
   },
+  lifetimes:{
+    attached(){
+      if(this.properties.value){
+        this.properties.value = this.data.value
+      }
+    }
+  },
   methods:{
     confirm(){
       this.triggerEvent('confirm',this.data.value)
     },
     cancel(){
-      this.triggerEvent('cancel','取消')
+      this.triggerEvent('cancel',this.data.value)
     },
     watchValue(event){
      this.data.value=event.detail.value

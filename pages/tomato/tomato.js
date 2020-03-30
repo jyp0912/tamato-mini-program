@@ -1,3 +1,5 @@
+const { http }  = require('../../lib/http.js')
+
 Page({
   timer:null,
   data: {
@@ -6,10 +8,14 @@ Page({
     timeStatus:'start',
     confirmVisible:false,
     againVisible:false,
-    finishConfirmVisible:false
+    finishConfirmVisible:false,
+    tomato:''
   },
   onShow:function(){
     this.countDown()
+    http.post('/tomatoes').then(res =>{
+      this.setData({tomato:res.data.resource})
+    })
   },
   countDown(){
     this.setData({timeStatus:'stop'})
@@ -55,8 +61,14 @@ Page({
     },
     confirmAbandon(event){
       let content = event.detail
-      wx.navigateBack({
-        to:-1
+      http.put(`/tomatoes/${this.data.tomato.id}`,{
+        description:content,
+        aborted:true
+      })
+      .then(res=>{
+        wx.navigateBack({
+          to:-1
+        })
       })
     },
     showConfirm(){
@@ -68,58 +80,18 @@ Page({
       this.countDown()
     }
   ,
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide: function () {
-
+    this.clearTimer()
+    http.put(`/tomatoes/${this.data.tomato.id}`,{
+      description:"退出放弃",
+      aborted:true
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function () {
-
+    this.clearTimer()
+    http.put(`/tomatoes/${this.data.tomato.id}`,{
+      description:"退出放弃",
+      aborted:true
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
