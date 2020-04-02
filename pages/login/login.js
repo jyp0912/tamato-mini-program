@@ -8,8 +8,9 @@ Page({
 
   },
   login(event){
-    console.log('ssss')
-    let encrypted_data = event.detail.encrypted_data
+    console.log(event)
+    let encrypted_data = event.detail.encryptedData
+    console.log(encrypted_data)
     let iv = event.detail.iv
     this.wxLogin(encrypted_data,iv)
     console.log('2')
@@ -21,6 +22,11 @@ Page({
   },
   loginMe(code,iv,encrypted_data){
     console.log(http.post)
+    console.log(code,
+      iv,
+      encrypted_data,
+      app_id,
+      app_secret)
     http.post('/sign_in/mini_program_user',{
       code,
       iv,

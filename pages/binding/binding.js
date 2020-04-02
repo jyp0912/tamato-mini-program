@@ -6,21 +6,25 @@ Page({
    */
   data: {
     account:"",
-    password:"",
-    isBinding:true
+    password_digest:"",
   },
-  watchAcount(){
+  watchAcount(event){
+    this.setData({account:event.detail.value})
+  },
+  watchPassword(event){
+    this.setData({password_digest:event.detail.value})
+  },
+  submit(){
+    http.post('/bindings',{
+      account:this.data.account,
+      password_digest:this.data.password_digest
+    })
+    .then(res=>{
+      wx.setStorageSync('me', res.data.resource)
+      wx.reLaunch({ url: "/pages/home/home" })
+    })
+  },
 
-  },
-  watchPassword(){
-
-  },
-  goToSignUp(){
-    this.setData({isBinding:false})
-  },
-  goToBind(){
-    this.setData({isBinding:true})
-  },
 
 
   /**

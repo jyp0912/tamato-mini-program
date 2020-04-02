@@ -5,7 +5,8 @@ Page({
   data: {
     lists:[],
     visibleCreateConfirm:false,
-    visibleUpdateConfirm:false
+    visibleUpdateConfirm:false,
+    updateContent: ""
   },
   onShow(){
     http.get('/todos?completed=false').then(res =>{
@@ -19,10 +20,10 @@ Page({
           completed: false,description: content
       })
       .then(res => {
-        let todo = [{id:this.data.lists.length+1,text:content,finished:false}]
+        let todo = [res.data.resource]
         this.data.lists = todo.concat(this.data.lists)
         this.setData({lists:this.data.lists})
-        this.hideConfirm()
+        this.hideCreateConfirm()
       })
     }
   },
@@ -45,7 +46,7 @@ Page({
     })
     .then(res => {
       let todo= res.data.resource
-      this,data.lists[index] =todo
+      this.data.lists[this.updateIndex] =todo
       this.setData({lists:this.data.lists})
       this.hideUpdateConfirm()
     })
@@ -58,7 +59,7 @@ Page({
     })
     .then(res => {
       let todo= res.data.resource
-      this,data.lists[index] =todo
+      this.data.lists[index] =todo
       this.setData({lists:this.data.lists})
       
     })

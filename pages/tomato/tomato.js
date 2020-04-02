@@ -3,7 +3,7 @@ const { http }  = require('../../lib/http.js')
 Page({
   timer:null,
   data: {
-    defaultSec:3,
+    defaultSec:1500,
     time:"",
     timeStatus:'start',
     confirmVisible:false,
@@ -53,13 +53,14 @@ Page({
     }
     this.setData({time:`${min}:${sec}`})
     },
-    confirmFinish(event){
+  confirmFinish(event){
       let content = event.detail
-    },
-    confirmCancel(){
       this.setData({ finishConfirmVisible: false })
     },
-    confirmAbandon(event){
+  confirmCancel(){
+      this.setData({ finishConfirmVisible: false })
+    },
+  confirmAbandon(event){
       let content = event.detail
       http.put(`/tomatoes/${this.data.tomato.id}`,{
         description:content,
@@ -71,11 +72,11 @@ Page({
         })
       })
     },
-    showConfirm(){
+  showConfirm(){
       this.setData({confirmVisible:true})
       this.clearTimer()
     },
-    hideConfirm(){
+ hideConfirm(){
       this.setData({confirmVisible:false})     
       this.countDown()
     }
